@@ -1,0 +1,8 @@
+.table_row {
+  font-size: medium;
+  font-weight: 500;
+}
+
+.table_row:hover {
+  cursor: pointer;
+}

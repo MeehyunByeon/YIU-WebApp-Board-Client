@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Layout from "./Layout";
+import BoardPage from "./pages/Board";
+import PostDetailPage from "./pages/Post";
+import PostFormPage from "./pages/PostForm";
+import ScrollToTop from "./ScrollToTop";
+
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Layout>
+        <Routes>
+          <Route exact path="/" element={<BoardPage />} />
+          <Route exact path="/form" element={<PostFormPage />} />
+          <Route exact path="/post/:id" element={<PostDetailPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
