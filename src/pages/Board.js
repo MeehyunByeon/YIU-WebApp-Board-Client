@@ -7,10 +7,10 @@ import Column from "antd/es/table/Column";
 import styles from "./Board.module.css";
 import { colors } from "../assets/colors";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { PostFormTypeAtom } from "../recoil/board";
+import { PostFormDataAtom, PostFormTypeAtom } from "../recoil/board";
 import PageHeaderImage from "../assets/post_img.svg";
 import dayjs from "dayjs";
 import { SearchOutlined } from "@ant-design/icons";
@@ -43,6 +43,8 @@ const BoardPage = (props) => {
   const [searchText, setSearchText] = useState("");
   // 폼 타입 => 작성
   const setFormType = useSetRecoilState(PostFormTypeAtom);
+  // 폼 데이터 세팅
+  const [formData, setFormData] = useRecoilState(PostFormDataAtom);
 
   const boardListHeader = () => {
     return (
@@ -86,6 +88,13 @@ const BoardPage = (props) => {
             title={"게시글 작성"}
             onClick={() => {
               setFormType("create");
+              setFormData({
+                boardId: 0,
+                userId: "",
+                pwd: "",
+                title: "",
+                contents: "",
+              });
               navigate("/form");
             }}
             size={"middle"}
